@@ -69,3 +69,4 @@ struct Cars {
  // Mycar1 na name of the variable wey go store one car with brand,price and color.
 
 /* MAPPING.
+ 
