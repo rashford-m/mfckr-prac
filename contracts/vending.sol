@@ -41,6 +41,6 @@ function purchase(uint amount) public payable {
     //we go store all the balance for contract money variable
     //e go require say the money big pass zero to see if peole don pay
 function withdrawContractMoney() public {
-    
+    require(msg.sender == owner,)
 }
 }
