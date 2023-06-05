@@ -34,7 +34,7 @@ contract yuki is ERC721Enumerable, Ownable {
     // public
     function mint(uint256 _mintAmount) public payable {
         uint256 supply = totalSupply();
-        require(!pause);
+        require(!paused);
         require(_mintAmount > 0);
         require(supply + _mintAmount <= maxSupply);
         
@@ -46,7 +46,7 @@ contract yuki is ERC721Enumerable, Ownable {
             _safeMint(msg.sender, supply  + i);
         }
     }
-function walletOwner(address _owner) public view returns (uint156[] memory) {
+function walletOwner(address _owner) public view returns (uint256[] memory) {
     uint256 ownerTokenCount = balanceOf(_owner);
     uint246[] memory tokenIds = new uint256[] (ownerTokenCount);
     for (uint256 i; i < ownerTokenCount; i++) {
@@ -55,20 +55,21 @@ function walletOwner(address _owner) public view returns (uint156[] memory) {
     }
     return tokenIds;
 }
+
 function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
     require(_exists(tokenId), "ERC721Metadata: URI quert for nonexistent token");
     if(revealed == false) {
         return notRevealedUri;
     }
     string memory currentBaseURI = _baseURI();
-    return bytes(currentBaseURI).length > 0 ? string(abi.encodePacked(currenyBaseURI, tokenId.toString(), baseExtention)) : "";
+    return bytes(currentBaseURI).length > 0 ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtention)) : "";
 
 }
 // Only Owner 
 function reveal() public onlyOwner {
     revealed = true;
 }
-function setCost(uint256 _newCCost) public onlyOwner {
+function setCost(uint256 _newCost) public onlyOwner {
     cost = _newCost;
 }
 function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
@@ -98,6 +99,3 @@ function withdraw() public payable onlyOwner {
     require(os);
     }
 }
-
-
-
