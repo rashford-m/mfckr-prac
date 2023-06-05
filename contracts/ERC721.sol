@@ -11,20 +11,22 @@ contract yuki is ERC721Enumerable, Ownable {
 
     string baseURI;
     string public baseExtention = ".json";
+    uint256 public cost = 0.05 ether;
     uint256 public maxSupply = 20;
     uint256 public maxMintAmount = 2;
     bool public paused = true;
     bool public revealed = false;
     string public notRevealedUri;
 
-    constructor (
+    constructor(
         string memory name,
         string memory _symbol,
+        string memory _initBaseURI,
         string memory _initNotRevealedUri
-    )
-    ERC721(name, _symbol) {
+    ) ERC721(name, _symbol) {
         setBaseURI(_initBaseURI);
         setNotRevealedURI(_initNotRevealedUri);
     }
     // internal
+    function _baseURI() internal
 }
